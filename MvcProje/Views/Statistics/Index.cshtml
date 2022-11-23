@@ -1,0 +1,9 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@foreach (var item in Model)
+{
+    <h3>@item.Key : @item.Value</h3>
+}
