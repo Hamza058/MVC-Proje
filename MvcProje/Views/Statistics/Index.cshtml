@@ -3,7 +3,9 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-@foreach (var item in Model)
-{
-    <h3>@item.Key : @item.Value</h3>
-}
+
+<p>Kategori Sayısı: @ViewBag.categoryCount</p>
+<p>Spor Kategorisine ait başlık sayısı : @ViewBag.headingCount</p>
+<p>Yazar Adında 'a' harfi geçen yazar sayısı : @ViewBag.writerCount</p>
+<p>En Fazla Başlığa sahip kategori : @ViewBag.maxCategory</p>
+<p>Kategori tablosundaki true-false farkı : @ViewBag.categoryTF</p>

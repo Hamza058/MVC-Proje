@@ -65,7 +65,7 @@ namespace MvcProje.Controllers
         [HttpPost]
         public ActionResult EditHeading(Heading heading)
         {
-            hm.HeadingAdd(heading);
+            hm.HeadingUpdate(heading);
             return RedirectToAction("Index");
         }
         public ActionResult DeleteHeading(int id)

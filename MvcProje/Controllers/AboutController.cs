@@ -34,5 +34,20 @@ namespace MvcProje.Controllers
         {
             return PartialView();
         }
+
+        public ActionResult AboutTrue(int id)
+        {
+            var about = am.GetByID(id);
+            about.AboutStatus = true;
+            am.AboutUpdate(about);
+            return RedirectToAction("Index");
+        }
+        public ActionResult AboutFalse(int id)
+        {
+            var about = am.GetByID(id);
+            about.AboutStatus = false;
+            am.AboutDelete(about);
+            return RedirectToAction("Index");
+        }
     }
 }

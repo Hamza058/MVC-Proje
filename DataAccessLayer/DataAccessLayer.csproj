@@ -57,13 +57,14 @@
     <Compile Include="Abstract\IContentDal.cs" />
     <Compile Include="Abstract\IHeadingDal.cs" />
     <Compile Include="Abstract\IImageFileDal.cs" />
+    <Compile Include="Abstract\IAdminDal.cs" />
     <Compile Include="Abstract\IMessageDal.cs" />
     <Compile Include="Abstract\IRepository.cs" />
     <Compile Include="Abstract\IWriterDal.cs" />
     <Compile Include="Concrete\Context.cs" />
-    <Compile Include="Concrete\Repositories\CategoryRepository.cs" />
     <Compile Include="Concrete\Repositories\GenericRepository.cs" />
     <Compile Include="EntityFramework\EFAboutDal.cs" />
+    <Compile Include="EntityFramework\EFAdminDal.cs" />
     <Compile Include="EntityFramework\EFCategoryDal.cs" />
     <Compile Include="EntityFramework\EFContactDal.cs" />
     <Compile Include="EntityFramework\EFContentDal.cs" />
@@ -119,6 +120,14 @@
     <Compile Include="Migrations\202211141409313_mig_admin.designer.cs">
       <DependentUpon>202211141409313_mig_admin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202211241358060_add_mesage_statu.cs" />
+    <Compile Include="Migrations\202211241358060_add_mesage_statu.designer.cs">
+      <DependentUpon>202211241358060_add_mesage_statu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202211241426366_add_about_statu.cs" />
+    <Compile Include="Migrations\202211241426366_add_about_statu.designer.cs">
+      <DependentUpon>202211241426366_add_about_statu.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -168,6 +177,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202211141409313_mig_admin.resx">
       <DependentUpon>202211141409313_mig_admin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202211241358060_add_mesage_statu.resx">
+      <DependentUpon>202211241358060_add_mesage_statu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202211241426366_add_about_statu.resx">
+      <DependentUpon>202211241426366_add_about_statu.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

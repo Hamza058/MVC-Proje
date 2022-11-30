@@ -30,11 +30,11 @@ namespace MvcProje.Controllers
 
         public PartialViewResult ContactPartial()
         {
-            var value = cm.GetList().Count();
-            var invalue = mm.GetListInbox().Count();
-            var sendvalue = mm.GetListSendbox().Count();
-            int[] dizi = { value, invalue, sendvalue };
-            return PartialView(dizi);
+            ViewBag.value = cm.GetList().Count();
+            ViewBag.Invalue = mm.GetListInbox().Count();
+            ViewBag.Sendvalue = mm.GetListSendbox().Count();
+            ViewBag.Notread = mm.GetListInbox().Where(x => !x.MessageStatus).Count();
+            return PartialView();
         }
     }
 }

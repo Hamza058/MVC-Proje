@@ -6,8 +6,6 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Inbox</h2>
-
 <!DOCTYPE html>
 <html>
 
@@ -71,21 +69,26 @@
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
-                                        <tr>
-                                            <td>
-                                                <div class="icheck-primary">
-                                                    <input type="checkbox" value="" id="check1">
-                                                    <label for="check1"></label>
-                                                </div>
-                                            </td>
-                                            <td class="mailbox-star"><a href="#"><i class="fas fa-star text-warning"></i></a></td>
-                                            <td class="mailbox-name"><a href="/Message/GetInBoxMessageDetails/@item.MessageID">@item.SenderMail</a></td>
-                                            <td class="mailbox-subject">
-                                                <b>@item.Subject</b> - @item.MessageContent...
-                                            </td>
-                                            <td class="mailbox-attachment"></td>
-                                            <td class="mailbox-date">@(((DateTime)item.MessageDate).ToString("dd-MMM-yyyy"))</td>
-                                        </tr>
+                                        string statu = "Okunmadı";
+                                        if (item.MessageStatus == true)
+                                        {
+                                            statu = "Okundu";
+                                        }
+                                    <tr>
+                                        <td>
+                                            <div class="icheck-primary">
+                                                <input type="checkbox" value="" id="check1">
+                                                <label for="check1"></label>
+                                            </div>
+                                        </td>
+                                        <td class="mailbox-star"><a href="#"><i class="fas fa-star text-warning"></i></a></td>
+                                        <td class="mailbox-name"><a href="/Message/GetInBoxMessageDetails/@item.MessageID">@item.SenderMail</a></td>
+                                        <td class="mailbox-subject">
+                                            <b>@item.Subject</b> - @item.MessageContent...
+                                        </td>
+                                        <td class="mailbox-date">@(((DateTime)item.MessageDate).ToString("dd-MMM-yyyy"))</td>
+                                        <td class="mailbox-attachment">@statu</td>
+                                    </tr>
                                     }
                                 </tbody>
                             </table>

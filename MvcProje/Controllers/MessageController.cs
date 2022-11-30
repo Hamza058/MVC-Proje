@@ -17,6 +17,7 @@ namespace MvcProje.Controllers
         MessageValidator mv = new MessageValidator();
 
         // GET: Message
+        [Authorize]
         public ActionResult Inbox()
         {
             var messagelist = mm.GetListInbox();
@@ -31,6 +32,8 @@ namespace MvcProje.Controllers
         public ActionResult GetInBoxMessageDetails(int id)
         {
             var value = mm.GetByID(id);
+            value.MessageStatus = true;
+            mm.MessageUpdate(value);
             return View(value);
         }
         [HttpGet]

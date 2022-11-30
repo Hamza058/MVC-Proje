@@ -14,19 +14,25 @@
                 <li class="nav-item active">
                     <a href="/Contact" class="nav-link">
                         <i class="fas fa-mail-bulk"></i> İletişim
-                        <span class="badge bg-primary float-right">@Model[0]</span>
+                        <span class="badge bg-primary float-right">@ViewBag.value</span>
                     </a>
                 </li>
                 <li class="nav-item active">
                     <a href="/Message/Inbox" class="nav-link">
                         <i class="fas fa-inbox"></i> Gelen Mesajlar
-                        <span class="badge bg-primary float-right">@Model[1]</span>
+                        <span class="badge bg-gradient-indigo float-right">@ViewBag.Invalue</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="/Message/Sendbox/" class="nav-link">
-                        <i class="far fa-envelope"></i> Gönnderilmiş Mesajlar
-                        <span class="badge bg-primary float-right">@Model[2]</span>
+                        <i class="far fa-envelope"></i> Gönderilmiş Mesajlar
+                        <span class="badge bg-success float-right">@ViewBag.Sendvalue</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/Message/Sendbox/" class="nav-link">
+                        <i class="fa fa-envelope"></i> Okunmamış Mesajlar
+                        <span class="badge bg-danger float-right">@ViewBag.Notread</span>
                     </a>
                 </li>
                 <li class="nav-item">
