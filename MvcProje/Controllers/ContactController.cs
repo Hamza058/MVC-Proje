@@ -14,11 +14,12 @@ namespace MvcProje.Controllers
         ContactManager cm = new ContactManager(new EFContactDal());
         ContactValidator cv = new ContactValidator();
         MessageManager mm = new MessageManager(new EFMessageDal());
-
         // GET: Contact
-        public ActionResult Index()
+        public ActionResult Index(string p="")
         {
-            var contactValues = cm.GetList();
+            var contactValues = cm.GetList(p);
+            if (!string.IsNullOrEmpty(p))
+                contactValues = cm.GetList(p);
             return View(contactValues);
         }
         [HttpGet]
@@ -30,10 +31,10 @@ namespace MvcProje.Controllers
 
         public PartialViewResult ContactPartial()
         {
-            ViewBag.value = cm.GetList().Count();
-            ViewBag.Invalue = mm.GetListInbox().Count();
-            ViewBag.Sendvalue = mm.GetListSendbox().Count();
-            ViewBag.Notread = mm.GetListInbox().Where(x => !x.MessageStatus).Count();
+            ViewBag.value = cm.GetList("").Count();
+            ViewBag.Invalue = mm.GetListInbox("admin").Count();
+            ViewBag.Sendvalue = mm.GetListSendbox("admin").Count();
+            ViewBag.Notread = mm.GetListInbox("admin").Where(x => !x.MessageStatus).Count();
             return PartialView();
         }
     }

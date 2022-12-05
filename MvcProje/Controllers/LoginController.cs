@@ -31,13 +31,21 @@ namespace MvcProje.Controllers
             
             if (adminuserinfo != null)
             {
-                FormsAuthentication.SetAuthCookie(adminuserinfo.AdminUserName,false);
-                Session["AdminUserName"] = adminuserinfo.AdminUserName;
-                return RedirectToAction("Index", "AdminCategory");
+                if (adminuserinfo.AdminStatus == true)
+                {
+                    FormsAuthentication.SetAuthCookie(adminuserinfo.AdminUserName, false);
+                    Session["AdminUserName"] = adminuserinfo.AdminUserName;
+                    return RedirectToAction("Index", "AdminCategory");
+                }
+                else
+                {
+                    ViewBag.AdminMessage = "Admin durumunuz onaylanmamıştır. !!!";
+                    return View();
+                } 
             }
             else
             {
-                ViewBag.AdminMessage = "Hatalı Kullancı Adı veya Şifre";
+                ViewBag.AdminMessage = "Kullanıcı bilgileriniz yanlış !!!";
                 return View();
             }
         }

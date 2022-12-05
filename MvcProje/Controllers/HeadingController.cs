@@ -21,6 +21,13 @@ namespace MvcProje.Controllers
             var headingValue = hm.GetList();
             return View(headingValue);
         }
+
+        public ActionResult HeadingReport()
+        {
+            var headingValue = hm.GetList();
+            return View(headingValue);
+        }
+
         [HttpGet]
         public ActionResult AddHeading()
         {

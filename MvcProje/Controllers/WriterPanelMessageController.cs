@@ -15,16 +15,17 @@ namespace MvcProje.Controllers
     {
         MessageManager mm = new MessageManager(new EFMessageDal());
         MessageValidator mv = new MessageValidator();
-
+        static string p;
         // GET: WriterPanelMessage
         public ActionResult Inbox()
         {
-            var messagelist = mm.GetListInbox();
+            p = (string)Session["WriterMail"];
+            var messagelist = mm.GetListInbox(p);
             return View(messagelist);
         }
         public ActionResult Sendbox()
         {
-            var messageList = mm.GetListSendbox();
+            var messageList = mm.GetListSendbox(p);
             return View(messageList);
         }
         [HttpGet]
@@ -41,8 +42,17 @@ namespace MvcProje.Controllers
             var value = mm.GetByID(id);
             return View(value);
         }
+
+        public ActionResult GetMessageNotRead()
+        {
+            var value = mm.GetListInbox(p).Where(x => !x.MessageStatus);
+            return View(value);
+        }
         public PartialViewResult MessageListMenu()
         {
+            ViewBag.Invalue = mm.GetListInbox(p).Count();
+            ViewBag.Sendvalue = mm.GetListSendbox(p).Count();
+            ViewBag.Notread = mm.GetListInbox(p).Where(x => !x.MessageStatus).Count();
             return PartialView();
         }
         [HttpGet]
@@ -56,7 +66,7 @@ namespace MvcProje.Controllers
             ValidationResult results = mv.Validate(message);
             if (results.IsValid)
             {
-                message.SenderMail = "sol@gmail.com";
+                message.SenderMail = p;
                 message.MessageDate = DateTime.Parse(DateTime.Now.ToShortDateString());
                 mm.MessageAdd(message);
                 return RedirectToAction("SendBox");

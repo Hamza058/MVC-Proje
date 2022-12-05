@@ -16,7 +16,15 @@ namespace MvcProje.Controllers
         {
             return View();
         }
-
+        public ActionResult GetAllContent(string p="")
+        {
+            var contents = cm.GetList(p);
+            if (string.IsNullOrEmpty(p))
+            {
+                contents = cm.GetList(p);
+            }
+            return View(contents);
+        }
         public ActionResult ContentByHeading(int id)
         {
             var contentvalues = cm.GetListByHeadingID(id);

@@ -38,9 +38,9 @@ namespace BusinessLayer.Concrete
             return _contactDal.Get(x => x.ContactID == id);
         }
 
-        public List<Contact> GetList()
+        public List<Contact> GetList(string p)
         {
-            return _contactDal.List();
+            return _contactDal.List(x=>x.Message.Contains(p));
         }
     }
 }

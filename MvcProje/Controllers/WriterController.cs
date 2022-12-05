@@ -15,6 +15,7 @@ namespace MvcProje.Controllers
     {
         WriterManager wm = new WriterManager(new EFWriterDal());
         WriterValidator writerValidator = new WriterValidator();
+        ContentManager cm = new ContentManager(new EFContentDal());
 
         public ActionResult Index()
         {
@@ -68,6 +69,12 @@ namespace MvcProje.Controllers
                 }
             }
             return View();
+        }
+        public ActionResult WriterContent(int id)
+        {
+            ViewBag.name = wm.GetByID(id).WriterName + " " + wm.GetByID(id).WriterSurName;
+            var contentvalues = cm.GetListByWriter(id);
+            return View(contentvalues);
         }
     }
 }

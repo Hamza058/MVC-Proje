@@ -33,12 +33,19 @@
                         <h3 class="card-title">Gelen Mesajlar</h3>
                         <div class="card-tools">
                             <div class="input-group input-group-sm">
-                                <input type="text" class="form-control" placeholder="Search Mail">
-                                <div class="input-group-append">
-                                    <div class="btn btn-primary">
-                                        <i class="fas fa-search"></i>
+                                @using (Html.BeginForm("Index", "Contact", FormMethod.Post))
+                                {
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-10">
+                                                @Html.TextBox("p", null, new { @class = "form-control" })
+                                            </div>
+                                            <div class="col-2">
+                                                <button class="fas fa-search" style="background-color:cornflowerblue; color:white; width:38px; height:38px; border-style:hidden; border-radius: 20%;" />
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                }
                             </div>
                         </div>
                         <!-- /.card-tools -->

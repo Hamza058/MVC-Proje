@@ -20,12 +20,12 @@ namespace MvcProje.Controllers
         [Authorize]
         public ActionResult Inbox()
         {
-            var messagelist = mm.GetListInbox();
+            var messagelist = mm.GetListInbox("admin");
             return View(messagelist);
         }
         public ActionResult Sendbox()
         {
-            var messageList = mm.GetListSendbox();
+            var messageList = mm.GetListSendbox("admin");
             return View(messageList);
         }
         [HttpGet]
