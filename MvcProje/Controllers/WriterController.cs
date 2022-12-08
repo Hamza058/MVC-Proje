@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace MvcProje.Controllers
 {
+    [Authorize(Roles = "B,A")]
     public class WriterController : Controller
     {
         WriterManager wm = new WriterManager(new EFWriterDal());

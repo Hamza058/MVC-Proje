@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace MvcProje.Controllers
 {
+    [Authorize(Roles = "B,A")]
     public class ContactController : Controller
     {
         ContactManager cm = new ContactManager(new EFContactDal());

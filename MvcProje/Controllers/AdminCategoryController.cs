@@ -11,11 +11,11 @@ using System.Web.Mvc;
 
 namespace MvcProje.Controllers
 {
+    [Authorize(Roles = "B")]
     public class AdminCategoryController : Controller
     {
         CategoryManager cm = new CategoryManager(new EFCategoryDal());
 
-        [Authorize(Roles ="B") ]
         // GET: AdminCategory
         public ActionResult Index()
         {

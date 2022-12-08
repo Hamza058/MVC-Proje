@@ -27,21 +27,21 @@ namespace MvcProje.Controllers
         public ActionResult Index(Admin admin)
         {
             var admins = am.GetList();
-            var adminuserinfo = admins.FirstOrDefault(x => x.AdminUserName == admin.AdminUserName && x.AdminPassword == admin.AdminPassword);
-            
+            var adminuserinfo = admins.FirstOrDefault(x => x.AdminUserName == admin.AdminUserName && x.AdminPassword == admin.AdminPassword && x.AdminStatus);
+
             if (adminuserinfo != null)
             {
                 if (adminuserinfo.AdminStatus == true)
                 {
                     FormsAuthentication.SetAuthCookie(adminuserinfo.AdminUserName, false);
                     Session["AdminUserName"] = adminuserinfo.AdminUserName;
-                    return RedirectToAction("Index", "AdminCategory");
+                    return RedirectToAction("Index", "Contact");
                 }
                 else
                 {
                     ViewBag.AdminMessage = "Admin durumunuz onaylanmamıştır. !!!";
                     return View();
-                } 
+                }
             }
             else
             {
@@ -58,8 +58,8 @@ namespace MvcProje.Controllers
         public ActionResult WriterLogin(Writer writer)
         {
             var writers = wm.GetList();
-            var writeruserinfo = writers.FirstOrDefault(x => x.WriterMail == writer.WriterMail && 
-            x.WriterPassword == writer.WriterPassword);
+            var writeruserinfo = writers.FirstOrDefault(x => x.WriterMail == writer.WriterMail &&
+            x.WriterPassword == writer.WriterPassword && x.WriterStatus);
 
             if (writeruserinfo != null)
             {
@@ -73,11 +73,23 @@ namespace MvcProje.Controllers
                 return View();
             }
         }
+        [HttpGet]
+        public ActionResult WriterAdd()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult WriterAdd(Writer writer)
+        {
+            writer.UserRole = "W";
+            wm.WriterAdd(writer);
+            return RedirectToAction("WriterLogin", "Login");
+        }
         public ActionResult LogOut()
         {
             FormsAuthentication.SignOut();
             Session.Abandon();
-            return RedirectToAction("Headings", "Default");
+            return RedirectToAction("HomePage", "Home");
         }
     }
 }

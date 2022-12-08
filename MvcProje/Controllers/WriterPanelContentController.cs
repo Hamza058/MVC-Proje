@@ -9,23 +9,33 @@ using System.Web.Mvc;
 
 namespace MvcProje.Controllers
 {
+    [Authorize(Roles = "W")]
     public class WriterPanelContentController : Controller
     {
         ContentManager cm = new ContentManager(new EFContentDal());
         WriterManager wm = new WriterManager(new EFWriterDal());
-        static int id;
+
+        public static string mail;
+        public static int id;
         static int headingID;
         // GET: WriterPanelContent
         public ActionResult MyContent(string p)
         {
             p = (string)Session["WriterMail"];
-            id = wm.GetList().FirstOrDefault(x => x.WriterMail == p).WriterID;
+            mail = p;
+            var writer = wm.GetList().FirstOrDefault(x => x.WriterMail == p);
+            ViewBag.name = writer.WriterName + " " + writer.WriterSurName;
+            ViewBag.img = writer.WriterImage;
+            id = writer.WriterID;
             var contentvalues = cm.GetListByWriter(id);
             return View(contentvalues);
         }
         [HttpGet]
         public ActionResult AddContent(int id)
         {
+            var writer = wm.GetList().FirstOrDefault(x => x.WriterMail == mail);
+            ViewBag.name = writer.WriterName + " " + writer.WriterSurName;
+            ViewBag.img = writer.WriterImage;
             headingID = id;
             return View();
         }

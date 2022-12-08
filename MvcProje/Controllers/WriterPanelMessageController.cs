@@ -11,15 +11,20 @@ using System.Web.Mvc;
 
 namespace MvcProje.Controllers
 {
+    [Authorize(Roles = "W")]
     public class WriterPanelMessageController : Controller
     {
+        WriterManager wm = new WriterManager(new EFWriterDal());
         MessageManager mm = new MessageManager(new EFMessageDal());
         MessageValidator mv = new MessageValidator();
-        static string p;
+
+        static string p = WriterPanelContentController.mail;
         // GET: WriterPanelMessage
         public ActionResult Inbox()
         {
-            p = (string)Session["WriterMail"];
+            var wrt = wm.GetList().FirstOrDefault(x => x.WriterMail == p);
+            ViewBag.name = wrt.WriterName + " " + wrt.WriterSurName;
+            ViewBag.img = wrt.WriterImage;
             var messagelist = mm.GetListInbox(p);
             return View(messagelist);
         }

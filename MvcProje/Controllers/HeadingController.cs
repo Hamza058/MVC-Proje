@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace MvcProje.Controllers
 {
+    [Authorize(Roles="B,A")]
     public class HeadingController : Controller
     {
         HeadingManager hm = new HeadingManager(new EFHeadingDal());

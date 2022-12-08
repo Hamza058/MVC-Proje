@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace MvcProje.Controllers
 {
+    [Authorize(Roles = "B,A")]
     public class ContentController : Controller
     {
         ContentManager cm = new ContentManager(new EFContentDal());

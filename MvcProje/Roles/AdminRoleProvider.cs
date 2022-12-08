@@ -14,6 +14,7 @@ namespace MvcProje.Roles
         public override string ApplicationName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         AdminManager am = new AdminManager(new EFAdminDal());
+        WriterManager wm = new WriterManager(new EFWriterDal());
 
         public override void AddUsersToRoles(string[] usernames, string[] roleNames)
         {
@@ -43,8 +44,20 @@ namespace MvcProje.Roles
         public override string[] GetRolesForUser(string username)
         {
             var admins = am.GetList();
-            var x = admins.FirstOrDefault(y => y.AdminUserName == username);
-            return new string[] { x.AdminUserRole };
+            var writers = wm.GetList();
+            var admin = admins.FirstOrDefault(y => y.AdminUserName == username);
+            var writer = writers.FirstOrDefault(z => z.WriterMail == username);
+            if (admin == null)
+            {
+                return new string[] { writer.UserRole };
+            }
+            else if(writer == null){
+                return new string[] { admin.AdminUserRole };
+            }
+            else
+            {
+                return new string[] { admin.AdminUserRole, writer.UserRole };
+            }
         }
 
         public override string[] GetUsersInRole(string roleName)

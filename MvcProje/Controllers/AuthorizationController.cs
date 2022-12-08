@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace MvcProje.Controllers
 {
+    [Authorize(Roles = "B,A")]
     public class AuthorizationController : Controller
     {
         AdminManager am = new AdminManager(new EFAdminDal());
@@ -29,7 +30,6 @@ namespace MvcProje.Controllers
             am.AdminAdd(admin);
             return RedirectToAction("Index");
         }
-
         [HttpGet]
         public ActionResult EditAdmin(int id)
         {

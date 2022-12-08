@@ -13,21 +13,24 @@ using BusinessLayer.ValidationRules;
 
 namespace MvcProje.Controllers
 {
+    [Authorize(Roles = "W")]
     public class WriterPanelController : Controller
     {
         HeadingManager hm = new HeadingManager(new EFHeadingDal());
         CategoryManager cm = new CategoryManager(new EFCategoryDal());
         WriterManager wm = new WriterManager(new EFWriterDal());
         WriterValidator writerValidator = new WriterValidator();
-        
-        static int writerID;
+
+        static string p= WriterPanelContentController.mail;
+        static int writerID = WriterPanelContentController.id;
 
         // GET: WriterPanel
         [HttpGet]
         public ActionResult WriterProfile()
         {
-            string p = (string)Session["WriterMail"];
-            writerID = wm.GetList().FirstOrDefault(x => x.WriterMail == p).WriterID;
+            var wrt = wm.GetList().FirstOrDefault(x => x.WriterMail == p);
+            ViewBag.name = wrt.WriterName + " " + wrt.WriterSurName;
+            ViewBag.img=wrt.WriterImage;
             var writer = wm.GetByID(writerID);
             return View(writer);
         }
@@ -51,9 +54,10 @@ namespace MvcProje.Controllers
         }
         public ActionResult MyHeading()
         {
-            string p = (string)Session["WriterMail"];
-            writerID = wm.GetList().FirstOrDefault(x => x.WriterMail == p).WriterID;
             var values = hm.GetListByWriter(writerID);
+            var wrt = wm.GetByID(writerID);
+            ViewBag.name = wrt.WriterName + " " + wrt.WriterSurName;
+            ViewBag.img = wrt.WriterImage;
             return View(values);
         }
 
@@ -107,6 +111,9 @@ namespace MvcProje.Controllers
         }
         public ActionResult AllHeading(int p = 1)
         {
+            var wrt = wm.GetByID(writerID);
+            ViewBag.name = wrt.WriterName + " " + wrt.WriterSurName;
+            ViewBag.img = wrt.WriterImage;
             var headingList = hm.GetList().ToPagedList(p, 4);
             return View(headingList);
         }

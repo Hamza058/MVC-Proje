@@ -132,6 +132,10 @@
     <Compile Include="Migrations\202212051454592_add_admin_status.designer.cs">
       <DependentUpon>202212051454592_add_admin_status.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202212061639033_add_writer-role.cs" />
+    <Compile Include="Migrations\202212061639033_add_writer-role.designer.cs">
+      <DependentUpon>202212061639033_add_writer-role.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -190,6 +194,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202212051454592_add_admin_status.resx">
       <DependentUpon>202212051454592_add_admin_status.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212061639033_add_writer-role.resx">
+      <DependentUpon>202212061639033_add_writer-role.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
