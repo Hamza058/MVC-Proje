@@ -5,6 +5,7 @@ using EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -26,8 +27,13 @@ namespace MvcProje.Controllers
         [HttpPost]
         public ActionResult Index(Admin admin)
         {
+            byte[] username = ASCIIEncoding.ASCII.GetBytes(admin.AdminUserName);
+            admin.AdminUserName = Convert.ToBase64String(username);
+            byte[] password = ASCIIEncoding.ASCII.GetBytes(admin.AdminPassword);
+            admin.AdminPassword = Convert.ToBase64String(password);
+
             var admins = am.GetList();
-            var adminuserinfo = admins.FirstOrDefault(x => x.AdminUserName == admin.AdminUserName && x.AdminPassword == admin.AdminPassword && x.AdminStatus);
+            var adminuserinfo = admins.FirstOrDefault(x => x.AdminUserName == admin.AdminUserName && x.AdminPassword == admin.AdminPassword);
 
             if (adminuserinfo != null)
             {
@@ -63,9 +69,17 @@ namespace MvcProje.Controllers
 
             if (writeruserinfo != null)
             {
-                FormsAuthentication.SetAuthCookie(writeruserinfo.WriterMail, false);
-                Session["WriterMail"] = writeruserinfo.WriterMail;
-                return RedirectToAction("MyContent", "WriterPanelContent");
+                if (writeruserinfo.WriterStatus == true)
+                {
+                    FormsAuthentication.SetAuthCookie(writeruserinfo.WriterMail, false);
+                    Session["WriterMail"] = writeruserinfo.WriterMail;
+                    return RedirectToAction("MyContent", "WriterPanelContent");
+                }  
+                else
+                {
+                    ViewBag.AdminMessage = "Kullanıcı bilgileriniz onaylanmamıştır. !!!";
+                    return View();
+                }
             }
             else
             {

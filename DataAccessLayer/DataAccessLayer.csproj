@@ -136,6 +136,10 @@
     <Compile Include="Migrations\202212061639033_add_writer-role.designer.cs">
       <DependentUpon>202212061639033_add_writer-role.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202212081544197_admin_userole_length.cs" />
+    <Compile Include="Migrations\202212081544197_admin_userole_length.designer.cs">
+      <DependentUpon>202212081544197_admin_userole_length.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -197,6 +201,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202212061639033_add_writer-role.resx">
       <DependentUpon>202212061639033_add_writer-role.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212081544197_admin_userole_length.resx">
+      <DependentUpon>202212081544197_admin_userole_length.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
