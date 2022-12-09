@@ -4,6 +4,7 @@ using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -93,8 +94,12 @@ namespace MvcProje.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult WriterAdd(Writer writer)
+        public ActionResult WriterAdd(Writer writer, HttpPostedFileBase WriterImage)
         {
+            var fileName = Path.GetFileName(WriterImage.FileName);
+            var path = Path.Combine(Server.MapPath("~/image"), fileName);
+            WriterImage.SaveAs(path);
+            writer.WriterImage = fileName;
             writer.UserRole = "W";
             wm.WriterAdd(writer);
             return RedirectToAction("WriterLogin", "Login");
@@ -103,7 +108,7 @@ namespace MvcProje.Controllers
         {
             FormsAuthentication.SignOut();
             Session.Abandon();
-            return RedirectToAction("HomePage", "Home");
+            return RedirectToAction("WriterLogin", "Login");
         }
     }
 }

@@ -1,11 +1,13 @@
 ﻿@using EntityLayer.Concrete
-@model List<Heading>
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<Heading>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-@{ 
+@{
     string color = "";
     string statu = "";
     string statuColor = "";
@@ -41,13 +43,13 @@
                             <th style="width: 20%">
                                 Başlık Adı
                             </th>
-                            <th style="width: 15%">
+                            <th style="width: 20%">
                                 Oluşturan Yazar
                             </th>
-                            <th style="width: 15%">
+                            <th style="width: 7%">
                                 Durum
                             </th>
-                            <th style="width: 15%" class="text-center">
+                            <th style="width: 7%" class="text-center">
                                 Kategori
                             </th>
                             <th style="width:30%">
@@ -108,17 +110,17 @@
                                 <td>
                                     <ul class="list-inline">
                                         <li class="list-inline-item">
-                                            <img alt="Avatar" class="table-avatar" src="@item.Writer.WriterImage">
+                                            <img alt="Avatar" class="table-avatar" src="~/image/@item.Writer.WriterImage">@item.Writer.WriterName @item.Writer.WriterSurName
                                         </li>
                                     </ul>
                                 </td>
-                                <td>
+                                <td class="project-state">
                                     <span class="@statuColor">@statu</span>
                                 </td>
                                 <td class="project-state">
                                     <span class="@color">@item.Category.CategoryName</span>
                                 </td>
-                                <td class="project-actions text-right">
+                                <td class="project-actions text-center">
                                     <a class="btn btn-primary btn-sm" href="/Content/ContentByHeading/@item.HeadingID">
                                         <i class="fas fa-folder">
                                         </i>
@@ -144,6 +146,13 @@
         </div>
         <!-- /.card -->
     </section>
+
+    @Html.PagedListPager((IPagedList)Model,p=>Url.Action("Index",new { p }),
+        new PagedListRenderOptions
+        {
+            LiElementClasses=new List<string>
+            {"page-link"}
+        })
     <a href="/Heading/AddHeading/" class="btn btn-primary">Yeni Başlık Ekle</a>
 </body>
 </html>

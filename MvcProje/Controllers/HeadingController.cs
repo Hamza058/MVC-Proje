@@ -1,6 +1,7 @@
 ﻿using BusinessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +18,9 @@ namespace MvcProje.Controllers
         WriterManager wm = new WriterManager(new EFWriterDal());
 
         // GET: Heading
-        public ActionResult Index()
+        public ActionResult Index(int p = 1)
         {
-            var headingValue = hm.GetList();
+            var headingValue = hm.GetList().ToPagedList(p, 4);
             return View(headingValue);
         }
 

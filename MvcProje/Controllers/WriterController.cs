@@ -23,30 +23,7 @@ namespace MvcProje.Controllers
             var writerValues = wm.GetList();
             return View(writerValues);
         }
-
-        [HttpGet]
-        public ActionResult AddWriter()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult AddWriter(Writer p)
-        {
-            ValidationResult results = writerValidator.Validate(p);
-            if (results.IsValid)
-            {
-                wm.WriterAdd(p);
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                foreach (var item in results.Errors)
-                {
-                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
-                }
-            }
-            return View();
-        }
+        
         [HttpGet]
         public ActionResult EditWriter(int id)
         {
