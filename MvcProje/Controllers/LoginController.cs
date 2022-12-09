@@ -10,6 +10,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Net.Mail;
 
 namespace MvcProje.Controllers
 {
@@ -96,13 +97,31 @@ namespace MvcProje.Controllers
         [HttpPost]
         public ActionResult WriterAdd(Writer writer, HttpPostedFileBase WriterImage)
         {
-            var fileName = Path.GetFileName(WriterImage.FileName);
-            var path = Path.Combine(Server.MapPath("~/image"), fileName);
-            WriterImage.SaveAs(path);
-            writer.WriterImage = fileName;
-            writer.UserRole = "W";
-            wm.WriterAdd(writer);
-            return RedirectToAction("WriterLogin", "Login");
+            try
+            {
+                MailAddress m = new MailAddress(writer.WriterMail);
+                if (WriterImage.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(WriterImage.FileName);
+                    var path = Path.Combine(Server.MapPath("~/image"), fileName);
+                    WriterImage.SaveAs(path);
+                    writer.WriterImage = fileName;
+                    writer.UserRole = "W";
+                    wm.WriterAdd(writer);
+                    return RedirectToAction("WriterLogin", "Login");
+                }
+                else
+                {
+                    TempData["msg"] = "<script>alert('Lütfen Seçtiğiniz Resmi kontrol ediniz');</script>";
+                    return RedirectToAction("WriterAdd", "Login");
+                }
+            }
+            catch (Exception)
+            {
+                //return Content("<script language='javascript' type='text/javascript'>alert('Geçerli bir mail adresi giriniz !!!');</script>");
+                TempData["msg"] = "<script>alert('Geçerli bir mail adresi giriniz');</script>";
+                return RedirectToAction("WriterAdd", "Login");
+            }
         }
         public ActionResult LogOut()
         {

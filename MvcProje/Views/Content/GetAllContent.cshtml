@@ -15,5 +15,7 @@
 }
 @foreach (var item in Model)
 {
-    <p>@item.ContentValue</p>
+    <ul>
+        <li>@item.ContentValue ( @item.Writer.WriterName @item.Writer.WriterSurName )</li>
+    </ul>
 }
