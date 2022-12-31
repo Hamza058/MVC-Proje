@@ -19,10 +19,8 @@ namespace EntityLayer.Concrete
         public DateTime HeadingDate { get; set; }
         public int CategoryID { get; set; }
         public int WriterID { get; set; }
-
         public bool HeadingStatus { get; set; }
-
-        //Bağlı tablolar-Foreign Primary
+        
         public virtual Category Category { get; set; }
         public virtual Writer Writer { get; set; }
 

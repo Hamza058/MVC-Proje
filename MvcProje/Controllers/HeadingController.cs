@@ -17,6 +17,7 @@ namespace MvcProje.Controllers
         CategoryManager cm = new CategoryManager(new EFCategoryDal());
         WriterManager wm = new WriterManager(new EFWriterDal());
 
+        [AllowAnonymous]
         // GET: Heading
         public ActionResult Index(int p = 1)
         {
