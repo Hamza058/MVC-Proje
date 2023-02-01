@@ -60,6 +60,7 @@
     <Compile Include="Abstract\IAdminDal.cs" />
     <Compile Include="Abstract\IMessageDal.cs" />
     <Compile Include="Abstract\IRepository.cs" />
+    <Compile Include="Abstract\ITalentsDal.cs" />
     <Compile Include="Abstract\IWriterDal.cs" />
     <Compile Include="Concrete\Context.cs" />
     <Compile Include="Concrete\Repositories\GenericRepository.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="EntityFramework\EFHeadingDal.cs" />
     <Compile Include="EntityFramework\EFImageFileDal.cs" />
     <Compile Include="EntityFramework\EFMessageDal.cs" />
+    <Compile Include="EntityFramework\EFTalentsDal.cs" />
     <Compile Include="EntityFramework\EFWriterDal.cs" />
     <Compile Include="Migrations\202210071125494_mig1.cs" />
     <Compile Include="Migrations\202210071125494_mig1.designer.cs">
@@ -140,6 +142,10 @@
     <Compile Include="Migrations\202212081544197_admin_userole_length.designer.cs">
       <DependentUpon>202212081544197_admin_userole_length.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202302011129317_add_talents.cs" />
+    <Compile Include="Migrations\202302011129317_add_talents.designer.cs">
+      <DependentUpon>202302011129317_add_talents.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -204,6 +210,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202212081544197_admin_userole_length.resx">
       <DependentUpon>202212081544197_admin_userole_length.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202302011129317_add_talents.resx">
+      <DependentUpon>202302011129317_add_talents.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
