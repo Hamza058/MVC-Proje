@@ -1,0 +1,26 @@
+﻿<button class="btn btn-success text-light" data-toggle="modal" data-target="#Modal1">
+    Yeni Yetenek Ekleme
+</button>
+
+<div class="modal" id="Modal1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="model-header p-1">
+                <h2 class="modal-title">
+                    Yetenek Bilgi Girişi
+                </h2>
+            </div>
+            <form method="post" action="/Talent/TalentAdd">
+                <div class="modal-body">
+                    <label>Yetenek Adı</label>
+                    <input type="text" name="TalentName" class="form-control" required />
+                    <br />
+                    <label>Yetenek Bilgisi</label>
+                    <input type="text" name="Knowledge" class="form-control" pattern="^[0-9]*$" maxlength="3" title="Sadece Rakam Giriniz!!!" required />
+                    <br />
+                    <button class="btn btn-info">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

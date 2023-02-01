@@ -1,0 +1,33 @@
+﻿@model EntityLayer.Concrete.Talents
+
+@{
+    ViewBag.Title = "TalentUpdate";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid py-2" style="background-image:url('../../AdminLTE-3.0.4/dist/img/back3.gif'); background-size: 100% 100%;">
+    <div class="col-6 m-auto border p-2 text-light">
+        <div class="row">
+            <div class="col-12 text-center">
+                <img src="~/AdminLTE-3.0.4/dist/img/avatar5.png" />
+            </div>
+            <div class="col-12 text-center"><h2>Hamza Kılıç</h2></div>
+            <div class="col-12 text-center"><h3>Software Engineer</h3></div>
+            <div class="col-12 border-bottom"><h4>Yetenekler</h4></div>
+            <div class="row">
+                <form method="post" action="/Talent/TalentUpdate">
+                    <div class="modal-body">
+                        <input type="hidden" name="Id" value="@Model.Id"/>
+                        <label>Yetenek Adı</label>
+                        <input type="text" name="TalentName" class="form-control" value="@Model.TalentName" required />
+                        <br />
+                        <label>Yetenek Bilgisi</label>
+                        <input type="text" name="Knowledge" class="form-control" pattern="^[0-9]*$" maxlength="3" title="Sadece Rakam Giriniz!!!" value="@Model.Knowledge" required />
+                        <br />
+                        <button class="btn btn-info">Kaydet</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+﻿@using EntityLayer.Concrete
+@model List<Talents>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid py-2" style="background-image:url('../../AdminLTE-3.0.4/dist/img/back3.gif'); background-size: 100% 100%;">
+    <div class="col-6 m-auto border p-2 text-light">
+        <div class="row">
+            <div class="col-12 text-center">
+                <img src="~/AdminLTE-3.0.4/dist/img/avatar5.png" />
+            </div>
+            <div class="col-12 text-center"><h2>Hamza Kılıç</h2></div>
+            <div class="col-12 text-center"><h3>Software Engineer</h3></div>
+            <div class="col-12 border-bottom"><h4>Yetenekler</h4></div>
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-12 px-4">
+                        <div class="progress-one my-lg-3" data-aos="fade-up">
+                            <h5 class="progress-tittle-w3">@item.TalentName @item.Knowledge%</h5>
+                            <div class="row">
+                                <div class="col-10">
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-striped" role="progressbar" style="width: @item.Knowledge%" aria-valuenow="@item.Knowledge" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <a href="/Talent/TalentUpdate/@item.Id" class="fas fa-pen text-light"></a>
+                                    &nbsp;
+                                    <a href="/Talent/TalentDelete/@item.Id" class="fas fa-trash text-light"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+    <br />
+    @Html.Action("TalentPartial", "Talent")
+</div>
