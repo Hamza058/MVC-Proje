@@ -9,7 +9,6 @@ using System.Web.Mvc;
 
 namespace MvcProje.Controllers
 {
-	[AllowAnonymous]
     public class TalentController : Controller
     {
 		TalentsManager tm = new TalentsManager(new EFTalentsDal());
