@@ -49,5 +49,5 @@ namespace MvcProje.Controllers
 
             return View();
         }
-    }
+	}
 }

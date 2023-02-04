@@ -18,6 +18,22 @@
     <link rel="stylesheet" href="/AdminLTE-3.0.4/dist/css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+        .mainSide {
+            width: 250px;
+            position: absolute;
+            left: inherit;
+            height: 100%
+        }
+        .sidebar2 {
+            width: 35px;
+            position: absolute;
+            display:none;
+            left: inherit;
+            height: 100%
+        }
+    </style>
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -29,16 +45,17 @@ to get the desired effect
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
 -->
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini" id="body" style="height:100% !important">
     <div class="wrapper">
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <aside class="mainSide sidebar-dark-primary" id="sidebar">
             <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link">
+            <div class="brand-link">
                 <img src="/AdminLTE-3.0.4/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                      style="opacity: .8">
                 <span class="brand-text font-weight-light">AdminLTE 3</span>
-            </a>
+                <i class="nav-icon fas fa-bars" style="margin-left:50px !important;" onclick="w3_close()"></i>
+            </div>
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
@@ -54,7 +71,7 @@ to get the desired effect
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
-    with font-awesome or any other icon font library -->
+                    with font-awesome or any other icon font library -->
                         @if (User.IsInRole("B"))
                         {
                             <li class="nav-item has-treeview">
@@ -129,7 +146,7 @@ to get the desired effect
                         </li>
                         <li class="nav-item has-treeview">
                             <a href="/Heading/HeadingReport/" class="nav-link">
-                                <i class="nav-icon fas fa-bars"></i>
+                                <i class="nav-icon fas fa-scroll"></i>
                                 <p>
                                     Raporlar
                                 </p>
@@ -189,8 +206,17 @@ to get the desired effect
             </div>
             <!-- /.sidebar -->
         </aside>
+
+        <aside class="sidebar2 sidebar-dark-primary" id="openNav">
+            <!-- Brand Logo -->
+            <div class="brand-link">
+                <i class="nav-icon fas fa-bars" onclick="w3_open()"></i>
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+        <div class="content-wrapper" id="main">
             <!-- Main content -->
             <div class="content">
                 @RenderBody()
@@ -211,5 +237,32 @@ to get the desired effect
     <script src="~/AdminLTE-3.0.4/plugins/chart.js/Chart.min.js"></script>
     <script src="~/AdminLTE-3.0.4/dist/js/demo.js"></script>
     <script src="~/AdminLTE-3.0.4/dist/js/pages/dashboard3.js"></script>
+    <script>
+        function myFunction(x) {
+            if (x.matches) {
+                document.getElementById("main").style.marginLeft = "35px";
+                document.getElementById("sidebar").style.display = "none";
+                document.getElementById("openNav").style.display = "block";
+            } else {
+                document.getElementById("sidebar").style.display = 'block';
+                document.getElementById("main").style.marginLeft = "250px";
+                document.getElementById("openNav").style.display = 'none';
+            }
+        }
+        var x = window.matchMedia("(max-width: 991px)")
+        myFunction(x)
+        x.addListener(myFunction)
+
+        function w3_open() {
+            document.getElementById("sidebar").style.display = 'block';
+            document.getElementById("main").style.marginLeft = "250px";
+            document.getElementById("openNav").style.display = 'none';
+        }
+        function w3_close() {
+            document.getElementById("main").style.marginLeft = "35px";
+            document.getElementById("sidebar").style.display = "none";
+            document.getElementById("openNav").style.display = "block";
+        }
+    </script>
 </body>
 </html>
